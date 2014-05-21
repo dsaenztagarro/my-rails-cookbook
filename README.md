@@ -27,6 +27,7 @@ This cookbook configures the environment for doventia-rb project with:
   - [ ] Create `doventia_development` and `doventia_test` databases
   - [ ] Create user `development` with password `development`
   - [ ] Grant all privileges to `development` user on databases created
+  - [ ] Allow `development` user to create databases
 
 *ATENTION*:
 - Actions marked with (X) are private actions so you are free to fork this 
