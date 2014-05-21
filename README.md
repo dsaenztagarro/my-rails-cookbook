@@ -7,29 +7,44 @@ Environment:
 - vim 
 
 Database:
-- PostgreSQL server
-- MySQL server
-- Sphinx search server
+- PostgreSQL server 9.3
+- MySQL server 5.5
+- Sphinx search server 2.0.8
 
 Backend:
 - rvm 2.1.0
+- Node.js  0.10.28
 
 Actions:
-- Create folder $HOME/Development/projects
-- Clone doventia-rb repo to projects folder (master)
-- Clone dotfiles repo to projects folder (master)
-- Create symlinks for dotfiles
-- Create `doventia_development` and `doventia_test` databases
-- Create user `development` with password `development`
-- Grant all privileges to `development` user on databases created
+- [X] Create folder $HOME/Development/projects
+- [X] Clone doventia-rb repo to projects folder (master)
+- [X] Clone dotfiles repo to projects folder (master)
+- [X] Create symlinks for dotfiles
+- [ ] Create `doventia_development` and `doventia_test` databases
+- [ ] Create user `development` with password `development`
+- [ ] Grant all privileges to `development` user on databases created
 
 *ATENTION*:
 - Actions marked with (X) are private actions so you are free to fork this 
 project and change or remove that actions
 
+*IMPROVEMENTS PENDING*:
+- Review provision process to avoid installing Chef Omnibus everytime
+- Add ssh keys during first provision step
+
 *NOTES*:
 - Verify your rvm version matches the .ruby-version specified in your project so
 the gemset is created firt time you access your project
+- Verify the path matches:
+
+```
+# recipes/default.rb
+node.default['rvm']['vagrant']['system_chef_solo'] = '/opt/chef/bin/chef-solo'
+```
+
+To avoid a hell, after running command `which chef-solo` you should verify that
+command `ls -l <path-to-chef-solo-executable>` returns a symlink to a path
+inside `/opt/chef/...`
 
 ## Supported Platforms
 

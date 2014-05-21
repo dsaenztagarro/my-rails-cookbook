@@ -23,6 +23,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 4. Add your known hosts (~/.ssh/known_hosts) to "vagrant" and "root" user on
   #   Vagrant VM. Add file to "root" user is mandatory due to the fact that
   #   recipes are execute as sudo, not as the vagrant user!!
+
+  # Uncommented after adding ssh keys to this VM
   config.ssh.private_key_path = "~/.ssh/id_rsa"
   config.ssh.forward_agent = true
 
@@ -43,9 +45,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # network interface) by any external networks.
   config.vm.network :private_network, type: "dhcp"
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is

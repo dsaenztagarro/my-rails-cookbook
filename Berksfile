@@ -15,3 +15,4 @@ cookbook 'sphinx'
 
 # Backend
 cookbook 'rvm'
+cookbook 'nodejs'

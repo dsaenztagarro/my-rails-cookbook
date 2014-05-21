@@ -23,3 +23,4 @@ depends 'sphinx'
 
 # Backend
 depends 'rvm'
+depends 'nodejs'
