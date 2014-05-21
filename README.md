@@ -2,27 +2,31 @@
 
 This cookbook configures the environment for doventia-rb project with:
 
-Environment:
-- git
-- vim 
+### Environment:
 
-Database:
-- PostgreSQL server 9.3
-- MySQL server 5.5
-- Sphinx search server 2.0.8
+ - git
+ - vim 
 
-Backend:
-- rvm 2.1.0
-- Node.js  0.10.28
+### Database:
 
-Actions:
-- [X] Create folder $HOME/Development/projects
-- [X] Clone doventia-rb repo to projects folder (master)
-- [X] Clone dotfiles repo to projects folder (master)
-- [X] Create symlinks for dotfiles
-- [ ] Create `doventia_development` and `doventia_test` databases
-- [ ] Create user `development` with password `development`
-- [ ] Grant all privileges to `development` user on databases created
+ - PostgreSQL server 9.3
+ - MySQL server 5.5
+ - Sphinx search server 2.0.8
+
+### Backend:
+
+ - rvm 2.1.0
+ - Node.js  0.10.28
+
+### Actions:
+
+  - [X] Create folder $HOME/Development/projects
+  - [X] Clone doventia-rb repo to projects folder (master)
+  - [X] Clone dotfiles repo to projects folder (master)
+  - [X] Create symlinks for dotfiles
+  - [ ] Create `doventia_development` and `doventia_test` databases
+  - [ ] Create user `development` with password `development`
+  - [ ] Grant all privileges to `development` user on databases created
 
 *ATENTION*:
 - Actions marked with (X) are private actions so you are free to fork this 
@@ -38,6 +42,7 @@ the gemset is created firt time you access your project
 - Verify the path matches:
 
 ```
+:::ruby
 # recipes/default.rb
 node.default['rvm']['vagrant']['system_chef_solo'] = '/opt/chef/bin/chef-solo'
 ```
