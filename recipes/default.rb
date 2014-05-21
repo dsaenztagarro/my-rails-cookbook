@@ -62,16 +62,6 @@ postgresql_connection_info = {
   :password => node['postgresql']['password']['postgres']
 }
 
-postgresql_database 'doventia_development' do
-  connection postgresql_connection_info
-  action :create
-end
-
-postgresql_database 'doventia_test' do
-  connection postgresql_connection_info
-  action :create
-end
-
 # create a mysql user but grant no privileges
 postgresql_database_user 'development' do
   connection postgresql_connection_info
@@ -79,11 +69,23 @@ postgresql_database_user 'development' do
   action     :create
 end
 
+postgresql_database 'doventia_development' do
+  connection postgresql_connection_info
+  owner 'development'
+  action :create
+end
+
+postgresql_database 'doventia_test' do
+  connection postgresql_connection_info
+  owner 'development'
+  action :create
+end
+
 # Grant all privileges on all tables in doventia_development db
 postgresql_database_user 'development' do
   connection    postgresql_connection_info
   database_name 'doventia_development'
-  privileges    [:all]
+  privileges    ['ALL PRIVILEGES']
   action        :grant
 end
 
@@ -92,8 +94,14 @@ end
 postgresql_database_user 'development' do
   connection    postgresql_connection_info
   database_name 'doventia_test'
-  privileges    [:all]
+  privileges    ['ALL PRIVILEGES']
   action        :grant
+end
+
+postgresql_database 'postgres' do
+  connection    postgresql_connection_info
+  sql 'ALTER ROLE development CREATEDB;'
+  action :query
 end
 
 node.default['sphinx']['use_mysql'] = true
