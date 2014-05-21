@@ -6,8 +6,20 @@ description      'Installs/Configures doventia-rb'
 long_description 'Installs/Configures doventia-rb'
 version          '0.1.0'
 
+# Fetching dependencies can fail from time to time due to the fact that
+# Berkshelf API service is unavailable. To check status:
+# https://api.berkshelf.com/status
 
-depends "apt"
-depends "postgresql"
-depends "mysql"
-depends "rvm"
+# Environment
+depends 'apt'
+depends 'vim'
+depends 'git'
+
+# Database
+depends 'postgresql'
+depends 'mysql'
+depends 'database'
+depends 'sphinx'
+
+# Backend
+depends 'rvm'
