@@ -11,21 +11,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.hostname = "doventia-rb-berkshelf"
-
-  # Previous steps:
-  # 1. Identities list of agent ssh forwarding
-  #   sh-add -L
-  # 2. To add identities to agent
-  #   ssh-add ~/.ssh/id_rsa
-  # 3. Add your public key (~/.ssh/id_rsa.pub) to ~/.ssh/authorized_keys on the
-  #   Vagrant VM. Also remove insecure vagrant key.
-  # 4. Add your known hosts (~/.ssh/known_hosts) to "vagrant" and "root" user on
-  #   Vagrant VM. Add file to "root" user is mandatory due to the fact that
-  #   recipes are execute as sudo, not as the vagrant user!!
+  config.vm.hostname = "freeoks-vm"
 
   # Uncommented after adding ssh keys to this VM
-  config.ssh.private_key_path = "~/.ssh/id_rsa"
+  config.ssh.private_key_path = ["~/.vagrant.d/insecure_private_key", "~/.ssh/id_rsa"]
   config.ssh.forward_agent = true
 
 
@@ -33,11 +22,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.omnibus.chef_version = :latest
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "opscode_ubuntu-12.04_provisionerless"
+  # config.vm.box = "opscode_ubuntu-12.04_provisionerless"
+  config.vm.box = "ubuntu-14.04"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+  # config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
@@ -58,7 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # vb.gui = true
 
     # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "1024"]
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
   #
   # View the documentation for the provider you're using for more
@@ -81,23 +71,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-      # postgresql: {
-      #   version: '9.3',
-      #   password: {
-      #     postgres: 'root'
-      #   }
-      # },
-      # mysql: {
-      #   server_root_password: 'root',
-      # },
-      # sphinx: {
-      #   use_mysql: true,
-      #   use_postres: true
-      # }
     }
 
     chef.run_list = [
-        "recipe[doventia-rb::default]"
+        "recipe[my-rails::default]",
+        "recipe[my-rails::freeosk]"
     ]
   end
 end

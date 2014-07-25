@@ -4,8 +4,7 @@ source "https://api.berkshelf.com"
 metadata
 
 # Environment
-cookbook 'vim'
-cookbook 'git'
+cookbook "my-environment", github: "dsaenztagarro/my-environment-cookbook"
 
 # Database
 cookbook 'postgresql'
@@ -16,3 +15,4 @@ cookbook 'sphinx'
 # Backend
 cookbook 'rvm'
 cookbook 'nodejs'
+cookbook 'redis', '~> 3.0.4'

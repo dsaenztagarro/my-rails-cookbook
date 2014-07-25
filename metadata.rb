@@ -1,4 +1,4 @@
-name             'doventia-rb'
+name             'my-rails'
 maintainer       'YOUR_NAME'
 maintainer_email 'YOUR_EMAIL'
 license          'All rights reserved'
@@ -11,9 +11,7 @@ version          '0.1.0'
 # https://api.berkshelf.com/status
 
 # Environment
-depends 'apt'
-depends 'vim'
-depends 'git'
+depends 'my-environment'
 
 # Database
 depends 'postgresql'
@@ -24,3 +22,5 @@ depends 'sphinx'
 # Backend
 depends 'rvm'
 depends 'nodejs'
+
+depends 'redis'
